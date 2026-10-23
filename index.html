@@ -1,0 +1,287 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#21170f">
+<meta name="description" content="Forge your perfect Valheim co-op world. Pick a preset, tune world modifiers, and share your choices with your fellow Vikings.">
+<meta property="og:title" content="Valheim • World Modifiers">
+<meta property="og:description" content="What kind of Valheim world should we survive together? Pick your settings and send them back.">
+<title>Valheim — Forge Our World</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Averia+Serif+Libre:wght@400;700&family=Cinzel+Decorative:wght@700;900&display=swap" rel="stylesheet">
+<style>
+:root{color-scheme:dark;--ink:#f6e6bf;--muted:#d2b998;--gold:#f0bc63;--bright:#ffe6a0;--line:#92754b;--dark:#1a110b;--stone:#353b3c}
+*{box-sizing:border-box}
+html{min-height:100%;scroll-behavior:smooth}
+body{margin:0;min-height:100vh;color:var(--ink);font-family:"Averia Serif Libre",Georgia,serif;background:#111718}
+body:after{content:"";position:fixed;inset:0;pointer-events:none;opacity:.12;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.9' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.38'/%3E%3C/svg%3E");z-index:20}
+a{color:#f9d794}
+button,input{font:inherit}
+button{cursor:pointer}
+button:focus-visible,input:focus-visible,summary:focus-visible{outline:3px solid #ffe49b;outline-offset:4px}
+button:disabled{opacity:.6;cursor:wait}
+.scene{position:fixed;inset:0;z-index:-1;background:radial-gradient(ellipse 44% 35% at 55% 46%,#c47f3938,transparent 75%),linear-gradient(180deg,#202d2e 0%,#3d3d32 37%,#151e1b 69%,#0b1211 100%);overflow:hidden}
+.scene svg{position:absolute;inset:0;height:100%;width:100%;opacity:.87}
+.scene:after{content:"";position:absolute;inset:0;background:linear-gradient(90deg,#090c0bd4,transparent 32%,transparent 73%,#090c0bd4),linear-gradient(180deg,#11171523,#111715a8 75%,#0b100fed)}
+.embers{position:fixed;inset:0;pointer-events:none;z-index:0;background:radial-gradient(circle at 18% 74%,#ff9e383c 0 1px,transparent 2px),radial-gradient(circle at 80% 17%,#fff3cb5d 0 1px,transparent 3px),radial-gradient(circle at 72% 78%,#ffad4f4d 0 1px,transparent 3px);background-size:243px 219px,325px 272px,187px 258px;opacity:.72}
+.shell{position:relative;z-index:1;max-width:900px;padding:48px 18px 70px;margin:auto}
+.brand{text-align:center;margin-bottom:26px;text-shadow:0 4px 8px #000b}
+.runes{letter-spacing:.62em;color:#e1a14e;font-size:19px;margin:0 0 7px;padding-left:.62em;opacity:.8}
+.brand h1{font-family:"Cinzel Decorative",Georgia,serif;font-size:clamp(39px,8vw,76px);margin:0;letter-spacing:.065em;line-height:1.05;background:linear-gradient(#fff1b6 2%,#f29d55 37%,#a7422a 80%,#641c1b);background-clip:text;-webkit-background-clip:text;color:transparent;-webkit-text-stroke:.6px #f4c27f70;filter:drop-shadow(0 2px 0 #170909)}
+.brand .sub{font-size:12px;letter-spacing:.38em;font-weight:bold;color:#eed2a1;text-transform:uppercase;margin:12px 0 0}
+.spear{height:1px;background:linear-gradient(90deg,transparent,#d0a76c 25%,#eedaa3 50%,#d0a76c 75%,transparent);max-width:370px;margin:18px auto 0;position:relative}
+.spear:after{content:"◆";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#222721;padding:0 8px;font-size:13px;color:#eabb6f}
+.board{position:relative;border:2px solid #ac8148;outline:2px solid #2e1b12;outline-offset:4px;box-shadow:0 0 0 7px #160d09bc,0 24px 95px 28px #000a,inset 0 0 0 3px #25180f,inset 0 0 45px 10px #11090577;border-radius:4px;background:repeating-linear-gradient(3deg,#140b0500 0 8px,#1209031f 8px 10px,#a87d4e10 11px 18px),linear-gradient(107deg,#573f29 0%,#664a32 24%,#382719 60%,#4c3826 100%);isolation:isolate}
+.board:after{content:"";position:absolute;inset:9px;border:1px solid #bd8b4b63;pointer-events:none;z-index:-1}
+.corner{position:absolute;width:43px;height:43px;border:3px solid #d19a50;z-index:2;pointer-events:none}
+.corner.tl{top:5px;left:5px;border-right:0;border-bottom:0}
+.corner.tr{top:5px;right:5px;border-left:0;border-bottom:0}
+.corner.bl{bottom:5px;left:5px;border-right:0;border-top:0}
+.corner.br{bottom:5px;right:5px;border-left:0;border-top:0}
+.board-head{text-align:center;padding:31px 25px 22px;border-bottom:1px solid #c39a584e;background:linear-gradient(#0b08064d,transparent)}
+.board-head .small{font-size:11px;letter-spacing:.28em;text-transform:uppercase;color:#dca45b}
+.board-head h2{font-family:"Cinzel Decorative",Georgia,serif;font-size:clamp(22px,4vw,29px);color:#fbe3ad;margin:6px 0 9px;text-shadow:1px 3px #130e0a}
+.board-head p{max-width:550px;margin:0 auto;font-size:15px;line-height:1.55;color:#ead1ac}
+.incoming{margin:13px auto 0;display:none;max-width:510px;padding:9px 13px;border:1px solid #d5a55b65;background:#2d2419;color:#ffdfa7;font-size:13px}
+.incoming.visible{display:block}
+.panel{padding:25px 36px 8px}
+.panel + .panel{padding-top:25px}
+.panel-head{display:flex;gap:13px;align-items:center;margin-bottom:7px}
+.panel-head .emblem{display:flex;align-items:center;justify-content:center;width:28px;height:28px;font-size:22px;color:#ffc878;text-shadow:0 2px #2f1108}
+.panel h3{font-family:"Cinzel Decorative",Georgia,serif;font-size:17px;letter-spacing:.02em;margin:0;color:#ffe6b2;text-shadow:0 2px #28150b}
+.note{font-size:13px;color:#dec3a0;line-height:1.45;margin:4px 0 17px 41px}
+.preset-grid{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:10px}
+.preset{position:relative;display:block;min-width:0}
+.preset input{position:absolute;opacity:0;inset:0;width:100%;height:100%;cursor:pointer;margin:0;z-index:2}
+.preset span{display:flex;justify-content:center;align-items:center;padding:12px 6px;text-align:center;min-height:49px;color:#f6d49e;font-weight:bold;font-size:15px;border:2px solid #777979;border-radius:3px;background:linear-gradient(#48494a,#23272a 52%,#45484a);box-shadow:inset 0 0 0 2px #1b1714,inset 0 0 0 4px #aab0a02a,0 3px 4px #150c0880;text-shadow:0 2px 2px #000}
+.preset:hover span{border-color:#d4b373;background:linear-gradient(#5d5c54,#383934 55%,#53584f)}
+.preset input:focus-visible + span{outline:3px solid #ffe49b;outline-offset:3px}
+.preset input:checked + span{border-color:#f6c06e;color:#fff5ce;background:linear-gradient(#805b2e,#4a361f 52%,#72512b);box-shadow:inset 0 0 0 2px #28160c,inset 0 0 0 4px #f1c67857,0 0 18px #d79b3d58}
+.etch{border:0;height:20px;margin:18px 0 7px;background:linear-gradient(90deg,transparent,#a87e42 25%,#f0ba60 50%,#a87e42 75%,transparent) center/100% 1px no-repeat;position:relative}
+.etch:after{content:"◇";position:absolute;left:50%;top:50%;transform:translate(-50%,-50%);background:#49331f;padding:0 10px;color:#f6c374;font-size:17px}
+.tuning-list{display:grid;gap:10px}
+.tune{border:1px solid #ab88567a;background:linear-gradient(90deg,#24190faa,#1d160c42);padding:13px 18px 15px;box-shadow:inset 0 1px #ceb5841a}
+.tune-top{display:flex;gap:12px;align-items:baseline;justify-content:space-between;margin-bottom:6px}
+.tune label{font-weight:bold;font-size:17px;color:#ffe1a1}
+.tune output{white-space:nowrap;font-weight:bold;font-size:15px;color:#ffc772;text-align:right}
+.tune .desc{font-size:12px;color:#ddc3a2;line-height:1.35;margin:0 0 9px}
+input[type=range]{display:block;cursor:pointer;width:100%;margin:10px 0 7px;height:18px;appearance:none;-webkit-appearance:none;background:transparent}
+input[type=range]::-webkit-slider-runnable-track{height:8px;border:1px solid #8c8173;background:linear-gradient(to right,#e2d4b8 0%,#d9ba7d var(--pct,50%),#55585a var(--pct,50%),#545658 100%);box-shadow:0 2px 3px #090807a0,inset 0 1px 2px #0008}
+input[type=range]::-moz-range-track{height:8px;border:1px solid #8c8173;background:linear-gradient(to right,#e2d4b8 0%,#d9ba7d var(--pct,50%),#55585a var(--pct,50%),#545658 100%);box-shadow:0 2px 3px #090807a0}
+input[type=range]::-webkit-slider-thumb{-webkit-appearance:none;appearance:none;width:21px;height:24px;margin-top:-9px;background:linear-gradient(#ffdc8d,#e3a33e 55%,#ad6e25);clip-path:polygon(24% 0,76% 0,100% 50%,76% 100%,24% 100%,0 50%);filter:drop-shadow(0 1px 1px black);border:0}
+input[type=range]::-moz-range-thumb{width:21px;height:24px;background:linear-gradient(#ffdc8d,#e3a33e 55%,#ad6e25);clip-path:polygon(24% 0,76% 0,100% 50%,76% 100%,24% 100%,0 50%);border:0;border-radius:0}
+.scale{display:flex;justify-content:space-between;color:#d0b68e;font-size:11px;line-height:1.1}
+.mod-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px 18px}
+.mod{display:flex;align-items:center;gap:13px;position:relative;cursor:pointer;padding:7px 5px;min-height:43px;color:#f3d3a0;font-weight:bold;font-size:15px}
+.mod input{position:absolute;opacity:0;width:30px;height:30px;left:5px;cursor:pointer}
+.hex{width:28px;height:28px;flex:0 0 28px;display:grid;place-items:center;background:linear-gradient(#aeb2ae,#566063);clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);filter:drop-shadow(0 2px #0d0d0d)}
+.hex:after{content:"";display:block;width:16px;height:16px;background:#2c3131;clip-path:polygon(25% 0,75% 0,100% 50%,75% 100%,25% 100%,0 50%);box-shadow:inset 0 0 0 2px #272a2b}
+.mod input:checked + .hex:after{background:linear-gradient(#ffe7a0,#e69b32);box-shadow:0 0 12px #ffaa2f}
+.mod input:focus-visible + .hex{outline:3px solid #ffe49b;outline-offset:3px;filter:drop-shadow(0 0 5px #ffd685)}
+.mod:hover{color:#fff0cd}
+.mod .secondary{display:block;font-weight:normal;color:#ccaf89;font-size:11px;margin-top:1px}
+.bottom{padding:19px 36px 33px;margin-top:15px;border-top:1px solid #e6ae6060;background:linear-gradient(#0e090652,#120b079c);text-align:center}
+.bottom h3{font-size:20px;font-family:"Cinzel Decorative",Georgia,serif;margin:0 0 5px;color:#ffdb96}
+.bottom p{font-size:13px;color:#d9bea0;margin:0 0 15px}
+.nickname{display:flex;align-items:center;gap:12px;max-width:380px;margin:0 auto 20px}
+.nickname label{white-space:nowrap;font-size:14px;color:#efd3a2}
+.nickname input{min-width:0;flex:1;background:#201914;border:1px solid #967c56;color:#fff0cc;padding:9px 11px;border-radius:2px;box-shadow:inset 0 2px 3px #0008}
+.nickname input::placeholder{color:#9d8e79}
+.actions{display:flex;flex-wrap:wrap;justify-content:center;gap:10px}
+.action{border:2px solid #9b9990;background:linear-gradient(#575b5a,#2c3132 60%,#494e4f);box-shadow:inset 0 0 0 2px #1b1b1b,0 3px 7px #0b0606a0;color:#f5dfb0;font-weight:bold;text-shadow:0 2px #111;font-size:15px;padding:12px 19px;min-height:47px;border-radius:2px}
+.action.primary{min-width:215px;color:#fff1cf;border-color:#ffc777;background:linear-gradient(#8d592b,#58381f 58%,#79502a);box-shadow:inset 0 0 0 2px #301c0d,0 2px 15px #fcb65b28}
+.action:hover{filter:brightness(1.22)}
+#status{font-size:13px;min-height:18px;margin:13px 0 0;color:#ffe39b}
+.details{text-align:left;max-width:710px;margin:14px auto 0}
+.details summary{cursor:pointer;display:table;margin:0 auto;font-size:13px;color:#f1ce92;text-decoration:underline;text-decoration-color:#e7ad5887;text-underline-offset:3px}
+.details pre{padding:14px;border:1px solid #866947;background:#160f0bd9;color:#f7dbaf;white-space:pre-wrap;word-break:break-word;font:13px/1.65 "Averia Serif Libre",Georgia,serif;text-align:left;max-height:320px;overflow:auto}
+.reset{border:0;color:#bfa583;text-decoration:underline;background:none;margin-top:15px;font-size:13px}
+.reset:hover{color:#ffe4ae}
+.foot{text-align:center;color:#cfbc9d;font-size:12px;text-shadow:0 2px #000;padding:27px 10px}
+.foot span{color:#f0bb77}
+@media(max-width:650px){
+.shell{padding:27px 13px 45px}
+.brand{margin-bottom:20px}.brand .sub{font-size:10px;letter-spacing:.24em}
+.panel{padding:21px 17px 6px}.panel+.panel{padding-top:19px}
+.board-head{padding:25px 20px 18px}
+.preset-grid{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}.preset span{min-height:44px;font-size:14px}
+.note{margin-left:0}.panel-head{gap:8px}
+.tune{padding:12px 13px}.tune label{font-size:15px}.tune output{font-size:14px}
+.mod-grid{grid-template-columns:1fr;gap:2px}
+.bottom{padding:23px 17px 28px}.actions{flex-direction:column}.action{width:100%}
+.corner{width:26px;height:26px}.nickname{flex-direction:column;align-items:stretch;gap:6px}
+}
+@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+</style>
+</head>
+<body>
+<div class="scene" aria-hidden="true"><svg viewBox="0 0 1440 900" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+<defs><radialGradient id="glow"><stop stop-color="#f4a05e" stop-opacity=".45"/><stop offset="1" stop-color="#ed9e58" stop-opacity="0"/></radialGradient><g id="pine" fill="#0b1515"><path d="M0 -190L-29 -112h13L-48 -45h20L-63 8H64L29 -45h19L16 -112h13Z"/><rect x="-7" y="0" width="14" height="42"/></g></defs>
+<circle cx="890" cy="380" r="430" fill="url(#glow)"/>
+<path d="M0 435 128 340 205 387 389 186 491 286 626 190 779 380 950 260 1056 368 1210 241 1440 405V900H0Z" fill="#536366" opacity=".38"/>
+<path d="M0 515 165 368 263 424 395 312 514 449 713 293 887 480 1138 303 1284 423 1440 319V900H0Z" fill="#243a3b" opacity=".78"/>
+<path d="M0 593 213 454 372 530 553 422 702 551 981 427 1190 555 1440 450V900H0Z" fill="#172928"/>
+<path d="M0 677 251 555 447 645 700 530 1032 626 1243 563 1440 636V900H0Z" fill="#101e1d"/>
+<use href="#pine" transform="translate(45 666) scale(1.8)"/><use href="#pine" transform="translate(175 701) scale(1.1)"/><use href="#pine" transform="translate(327 650) scale(1.4)"/><use href="#pine" transform="translate(502 714) scale(.95)"/><use href="#pine" transform="translate(658 678) scale(1.35)"/><use href="#pine" transform="translate(801 725) scale(1.1)"/><use href="#pine" transform="translate(966 687) scale(1.7)"/><use href="#pine" transform="translate(1115 724) scale(1.1)"/><use href="#pine" transform="translate(1295 680) scale(1.7)"/><use href="#pine" transform="translate(1430 737) scale(1.8)"/>
+</svg></div><div class="embers" aria-hidden="true"></div>
+<main class="shell">
+<header class="brand"><p class="runes" aria-hidden="true">ᚠ ᚢ ᚦ ᚨ ᚱ ᚲ</p><h1>VALHEIM</h1><p class="sub">Forge Our World • Co-op Edition</p><div class="spear"></div></header>
+<form class="board" id="world-form">
+<i class="corner tl" aria-hidden="true"></i><i class="corner tr" aria-hidden="true"></i><i class="corner bl" aria-hidden="true"></i><i class="corner br" aria-hidden="true"></i>
+<header class="board-head"><div class="small">The choices of the fallen</div><h2>World Modifiers</h2><p>Skål, Viking. What kind of world should we play? Choose your rules, then send your picks to your fellow adventurer.</p><div class="incoming" id="incoming">A fellow Viking shared these choices with you. You can tweak them and forge your own.</div></header>
+<section class="panel" aria-labelledby="presets-title">
+<div class="panel-head"><span class="emblem" aria-hidden="true">ᛟ</span><h3 id="presets-title">Choose a Preset</h3></div>
+<p class="note">The overall feel of our world. Customize the finer details below.</p>
+<div class="preset-grid" role="radiogroup" aria-label="World difficulty preset">
+<label class="preset"><input type="radio" name="preset" value="Easy"><span>Easy</span></label>
+<label class="preset"><input type="radio" name="preset" value="Standard" checked><span>Standard</span></label>
+<label class="preset"><input type="radio" name="preset" value="Hard"><span>Hard</span></label>
+<label class="preset"><input type="radio" name="preset" value="Hardcore"><span>Hardcore</span></label>
+<label class="preset"><input type="radio" name="preset" value="Casual"><span>Casual</span></label>
+<label class="preset"><input type="radio" name="preset" value="Hammer Mode"><span>Hammer Mode</span></label>
+<label class="preset"><input type="radio" name="preset" value="Immersive"><span>Immersive</span></label>
+</div></section>
+<div class="etch" aria-hidden="true"></div>
+<section class="panel" aria-labelledby="custom-title">
+<div class="panel-head"><span class="emblem" aria-hidden="true">ᛏ</span><h3 id="custom-title">Customize the World</h3></div>
+<p class="note">Drag each golden marker to set your preferred rules.</p>
+<div class="tuning-list">
+<div class="tune"><div class="tune-top"><label for="combat">Combat</label><output id="combat-value" for="combat">Normal</output></div><p class="desc">How punishing should enemies be?</p><input type="range" id="combat" min="0" max="4" step="1" value="2" aria-label="Combat difficulty"><div class="scale"><span>Very easy</span><span>Very hard</span></div></div>
+<div class="tune"><div class="tune-top"><label for="death">Death Penalty</label><output id="death-value" for="death">Normal</output></div><p class="desc">The price of falling in battle. Hardcore includes gear loss.</p><input type="range" id="death" min="0" max="5" step="1" value="3" aria-label="Death penalty"><div class="scale"><span>Casual</span><span>Hardcore · Gear loss</span></div></div>
+<div class="tune"><div class="tune-top"><label for="resources">Resources</label><output id="resources-value" for="resources">1×</output></div><p class="desc">How much we gather from the world.</p><input type="range" id="resources" min="0" max="5" step="1" value="2" aria-label="Resource multiplier"><div class="scale"><span>0.5×</span><span>3×</span></div></div>
+<div class="tune"><div class="tune-top"><label for="raids">Raids</label><output id="raids-value" for="raids">Every 4 hours</output></div><p class="desc">How often enemies come knocking at the gates.</p><input type="range" id="raids" min="0" max="5" step="1" value="3" aria-label="Raid frequency"><div class="scale"><span>None</span><span>Every 20 minutes</span></div></div>
+<div class="tune"><div class="tune-top"><label for="portals">Portals</label><output id="portals-value" for="portals">Standard (no metals)</output></div><p class="desc">What can pass through our portals.</p><input type="range" id="portals" min="0" max="3" step="1" value="1" aria-label="Portal rules"><div class="scale"><span>All items</span><span>Disabled</span></div></div>
+</div></section>
+<div class="etch" aria-hidden="true"></div>
+<section class="panel" aria-labelledby="other-title">
+<div class="panel-head"><span class="emblem" aria-hidden="true">ᚱ</span><h3 id="other-title">World Options</h3></div>
+<p class="note">Select the hexagonal stones to turn each modifier on or off.</p>
+<div class="mod-grid">
+<label class="mod"><input type="checkbox" data-mod="No build cost"><span class="hex" aria-hidden="true"></span><span>No build cost<span class="secondary">Buildings need no materials</span></span></label>
+<label class="mod"><input type="checkbox" data-mod="No craft cost"><span class="hex" aria-hidden="true"></span><span>No craft cost<span class="secondary">Craft items for free</span></span></label>
+<label class="mod"><input type="checkbox" data-mod="Player-based raids"><span class="hex" aria-hidden="true"></span><span>Player-based raids<span class="secondary">Raids scale with each player</span></span></label>
+<label class="mod"><input type="checkbox" data-mod="Passive creatures"><span class="hex" aria-hidden="true"></span><span>Passive creatures<span class="secondary">Creatures are less aggressive</span></span></label>
+<label class="mod"><input type="checkbox" data-mod="No map"><span class="hex" aria-hidden="true"></span><span>No map<span class="secondary">Explore without a map</span></span></label>
+<label class="mod"><input type="checkbox" data-mod="Fire hazards"><span class="hex" aria-hidden="true"></span><span>Fire hazards<span class="secondary">Fires can damage the world</span></span></label>
+</div></section>
+<footer class="bottom">
+<h3>Send Your Choices</h3><p>Once you've forged the perfect world, share your preferences with me.</p>
+<div class="nickname"><label for="nickname">Your Viking name</label><input type="text" id="nickname" maxlength="48" placeholder="Optional" autocomplete="nickname"></div>
+<div class="actions"><button type="button" class="action primary" id="share">⚔ Share My Choices</button><button type="button" class="action" id="copy">Copy Text</button><button type="button" class="action" id="link">Copy Results Link</button></div>
+<div role="status" aria-live="polite" id="status"></div>
+<details class="details"><summary>Preview my choices</summary><pre id="preview"></pre></details>
+<button type="reset" class="reset">Reset to starting choices</button>
+</footer>
+</form>
+<p class="foot">Made for fellow Vikings. <span>Fan-made companion</span> — not affiliated with Iron Gate or Coffee Stain.</p>
+</main>
+<script>
+(function(){
+  "use strict";
+  var options={
+    combat:["Very easy","Easy","Normal","Hard","Very hard"],
+    death:["Casual","Very easy","Easy","Normal","Hard","Hardcore (gear loss)"],
+    resources:["0.5×","0.75×","1×","1.5×","2×","3×"],
+    raids:["None","Every 15 hours","Every 9 hours","Every 4 hours","Every 1.5 hours","Every 20 minutes"],
+    portals:["All items","Standard (no metals)","No boss portals","Disabled"]
+  };
+  var ids=["combat","death","resources","raids","portals"];
+  var defaults={combat:2,death:3,resources:2,raids:3,portals:1};
+  var keys={combat:"c",death:"d",resources:"r",raids:"a",portals:"o"};
+  var form=document.getElementById("world-form");
+  var presetButtons=Array.from(form.querySelectorAll('input[name="preset"]'));
+  var mods=Array.from(form.querySelectorAll("[data-mod]"));
+  var nickname=document.getElementById("nickname");
+  var status=document.getElementById("status");
+  var preview=document.getElementById("preview");
+  function getPreset(){return (presetButtons.find(function(el){return el.checked})||presetButtons[1]).value}
+  function summarize(){
+    var lines=["⚔ VALHEIM — OUR WORLD RULES",""];
+    var n=nickname.value.trim();
+    if(n){lines.push("Viking: "+n,"")}
+    lines.push("Preset: "+getPreset());
+    ids.forEach(function(id){var label={combat:"Combat",death:"Death penalty",resources:"Resources",raids:"Raids",portals:"Portals"}[id];lines.push(label+": "+options[id][Number(document.getElementById(id).value)])});
+    lines.push("","WORLD OPTIONS");
+    mods.forEach(function(el){lines.push((el.checked?"ON":"OFF")+" — "+el.dataset.mod)});
+    lines.push("","Skål! 🍻");
+    return lines.join("\n");
+  }
+  function urlWithPicks(){
+    var u=new URL(window.location.href);
+    u.search="";
+    u.hash="";
+    var q=u.searchParams;
+    q.set("p",String(presetButtons.findIndex(function(el){return el.checked})));
+    ids.forEach(function(id){q.set(keys[id],document.getElementById(id).value)});
+    var bitmask=mods.reduce(function(sum,el,i){return sum|(el.checked?(1<<i):0)},0);
+    q.set("m",String(bitmask));
+    if(nickname.value.trim())q.set("n",nickname.value.trim());
+    return u.toString();
+  }
+  function update(){
+    ids.forEach(function(id){
+      var el=document.getElementById(id);
+      document.getElementById(id+"-value").textContent=options[id][Number(el.value)];
+      el.style.setProperty("--pct",(Number(el.value)/Number(el.max)*100)+"%");
+    });
+    preview.textContent=summarize();
+  }
+  function load(){
+    var q=new URLSearchParams(window.location.search);
+    if(!q.has("p")&&!q.has("c")&&!q.has("m")){update();return}
+    var pi=Number(q.get("p"));
+    if(q.has("p")&&Number.isInteger(pi)&&pi>=0&&pi<presetButtons.length)presetButtons[pi].checked=true;
+    ids.forEach(function(id){
+      var raw=q.get(keys[id]);
+      if(raw===null||raw.trim()==="")return;
+      var val=Number(raw);
+      if(Number.isInteger(val)&&val>=0&&val<options[id].length)document.getElementById(id).value=String(val);
+    });
+    var m=Number(q.get("m"));
+    if(q.has("m")&&Number.isInteger(m)&&m>=0&&m<=63)mods.forEach(function(el,i){el.checked=Boolean(m&(1<<i))});
+    if(q.has("n"))nickname.value=(q.get("n")||"").slice(0,48);
+    document.getElementById("incoming").classList.add("visible");
+    update();
+  }
+  async function copy(text){
+    try{await navigator.clipboard.writeText(text);return true}
+    catch(e){
+      var t=document.createElement("textarea");t.value=text;t.setAttribute("readonly","");t.style.position="fixed";t.style.opacity="0";document.body.appendChild(t);t.select();
+      var ok=false;try{ok=document.execCommand("copy")}catch(ignore){}
+      t.remove();return ok;
+    }
+  }
+  function message(msg){status.textContent=msg}
+  form.addEventListener("input",function(){update();message("")});
+  form.addEventListener("change",function(){update();message("")});
+  document.getElementById("copy").addEventListener("click",async function(){
+    message(await copy(summarize())?"Copied! Paste your choices into a message.":"Copy the text from the preview below.");
+    if(!status.textContent.startsWith("Copied"))document.querySelector(".details").open=true;
+  });
+  document.getElementById("link").addEventListener("click",async function(){
+    if(location.protocol==="file:"){message("Open the published website to copy a shareable results link.");return}
+    message(await copy(urlWithPicks())?"Results link copied! Send it to your fellow Viking.":"Unable to copy automatically. Use the Share button instead.");
+  });
+  document.getElementById("share").addEventListener("click",async function(){
+    var shareData={title:"My Valheim world settings",text:summarize()};
+    if(location.protocol!=="file:")shareData.url=urlWithPicks();
+    if(navigator.share){try{await navigator.share(shareData);message("Your picks are ready to share.");return}catch(e){if(e.name==="AbortError")return}}
+    message(await copy(summarize()+(location.protocol!=="file:"?"\n\nMy chosen settings link: "+urlWithPicks():""))?"Copied your choices and results link! Paste into a message.":"Open the preview below and copy your choices.");
+    if(!status.textContent.startsWith("Copied"))document.querySelector(".details").open=true;
+  });
+  form.addEventListener("reset",function(){setTimeout(function(){
+    presetButtons[1].checked=true;
+    ids.forEach(function(id){document.getElementById(id).value=String(defaults[id])});
+    nickname.value="";
+    mods.forEach(function(el){el.checked=false});
+    update();message("Starting choices restored.");
+    if(window.history&&location.protocol!=="file:")window.history.replaceState(null,"",location.pathname);
+    document.getElementById("incoming").classList.remove("visible");
+  },0)});
+  load();
+})();
+</script>
+</body>
+</html>
